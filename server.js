@@ -7,6 +7,8 @@ const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
+// We add methodoverride so we are able to delete files since from a browser we can only make get and post requests
+const methodOverride = require("method-override");
 
 // requiring the index route file so our server knows it exists to use it
 const indexRouter = require("./routes/index");
@@ -17,6 +19,7 @@ const booksRouter = require("./routes/books");
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
+app.use(methodOverride("_method"));
 app.use(expressLayouts);
 app.use(express.static("public"));
 // app.use(express.static(__dirname + "/public"));
